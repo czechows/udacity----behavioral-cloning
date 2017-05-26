@@ -23,7 +23,7 @@ for line in lines:
     measurement = float(line[3])
     measurements.append(measurement)
 
-x_train = np.array(images)
+X_train = np.array(images)
 y_train = np.array(measurements)
 
 model = Sequential()
