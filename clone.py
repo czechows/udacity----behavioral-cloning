@@ -35,6 +35,8 @@ datagen = ImageDataGenerator(
 X_train = np.array(images)
 y_train = np.array(measurements)
 
+datagen.fit(X_train)
+
 model = Sequential()
 
 batch_size = 128
@@ -78,7 +80,8 @@ model.add(Dense(4096, activation='relu', name='fc2'))
 model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
-model.fit(X_train, y_train, batch_size=batch_size, validation_split=0.2, shuffle=True, nb_epoch=7)
+#model.fit(X_train, y_train, batch_size=batch_size, validation_split=0.2, shuffle=True, nb_epoch=7)
+model.fit_generator(datagen.flow(X_train, y_train, batch_size=batch_size), steps_per_epoch=len(X_train) / batch_size, epochs=5)
 
 model.save('model.h5')
 
