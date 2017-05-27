@@ -27,12 +27,13 @@ X_train = np.array(images)
 y_train = np.array(measurements)
 
 model = Sequential()
-model.add(Flatten(input_shape=(160,320,3)))
-model.add(Dense(1))
 
-model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv1'))
+model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', input_shape=(160,320,3), name='block1_conv1'))
 model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv1'))
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
+
+model.add(Flatten())
+model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
 model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=7)
