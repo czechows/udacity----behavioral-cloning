@@ -48,7 +48,7 @@ batch_size = 16
 model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3) )
 
 
-model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', border_mode='same'))
+model.add(Conv2D(24, 5, 5, strides=(2,2), activation='relu', border_mode='same'))
 
 
 # VGG: Block 1
