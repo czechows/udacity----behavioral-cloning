@@ -2,8 +2,8 @@ import csv
 import cv2
 import numpy as np
 import keras
-from keras.models import Sequential, Conv2D, MaxPooling2D
-from keras.layers import Flatten, Dense
+from keras.models import Sequential
+from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D
 
 lines = []
 with open ('data/driving_log.csv') as csvfile:
