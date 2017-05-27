@@ -35,8 +35,8 @@ datagen = ImageDataGenerator(
 X_train = np.array(images)
 y_train = np.array(measurements)
 
-#X_train = X_train.astype('float32')
-#datagen.fit(X_train)
+X_train = X_train.astype('float32')
+datagen.fit(X_train)
 
 model = Sequential()
 
