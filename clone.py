@@ -61,10 +61,10 @@ model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_
 model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv3'))
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
-model.add(Flatten(), name='flatten')
-model.add(Dense(4096), activation='relu', name='fc1')
-model.add(Dense(4096), activation='relu', name='fc2')
-model.add(Dense(1), name='predictions')
+model.add(Flatten(name='flatten'))
+model.add(Dense(4096, activation='relu', name='fc1'))
+model.add(Dense(4096, activation='relu', name='fc2'))
+model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
 model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=7)
