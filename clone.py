@@ -29,7 +29,7 @@ y_train = np.array(measurements)
 model = Sequential()
 
 model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', input_shape=(160,320,3), name='block1_conv1'))
-model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv1'))
+model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 
 model.add(Flatten())
