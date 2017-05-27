@@ -35,8 +35,8 @@ datagen = ImageDataGenerator(
 X_train = np.array(images)
 y_train = np.array(measurements)
 
-X_train = X_train.astype('float32')
-datagen.fit(X_train)
+#X_train = X_train.astype('float32')
+#datagen.fit(X_train)
 
 model = Sequential()
 
@@ -45,12 +45,15 @@ batch_size = 16
 # Preprocessing
 #model.add(Cropping2D( cropping((70,25), (1,1)), input_shape=(160,320,3) ))
 
-#model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3) )
+model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3) )
+
+
+model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', border_mode='same'))
+
 
 # VGG: Block 1
-model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', input_shape=(160,320,3), name='block1_conv1'))
-model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
+#model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 
 # Block 2
 #model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1'))
