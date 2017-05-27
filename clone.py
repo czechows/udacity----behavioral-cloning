@@ -23,6 +23,14 @@ for line in lines:
     measurement = float(line[3])
     measurements.append(measurement)
 
+datagen = ImageDataGenerator(
+    featurewise_center=True,
+    featurewise_std_normalization=True,
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    horizontal_flip=True)
+
 X_train = np.array(images)
 y_train = np.array(measurements)
 
