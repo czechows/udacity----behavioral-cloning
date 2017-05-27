@@ -29,8 +29,9 @@ y_train = np.array(measurements)
 model = Sequential()
 
 # Preprocessing
-model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3))
-model.add(Cropping2D( cropping((70,25), (1,1)) ))
+model.add(Cropping2D( cropping((70,25), (1,1)), input_shape=(160,320,3) ))
+
+model.add(Lambda(lambda x: x / 255.0 - 0.5)
 
 # VGG: Block 1
 model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv1'))
