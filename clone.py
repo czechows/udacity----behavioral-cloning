@@ -76,8 +76,8 @@ model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 #model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
 model.add(Flatten(name='flatten'))
-model.add(Dense(4096, activation='relu', name='fc1'))
-model.add(Dense(4096, activation='relu', name='fc2'))
+model.add(Dense(16, activation='relu', name='fc1'))
+model.add(Dense(8, activation='relu', name='fc2'))
 model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
