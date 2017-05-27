@@ -40,7 +40,7 @@ y_train = np.array(measurements)
 
 model = Sequential()
 
-batch_size = 128
+batch_size = 16
 
 # Preprocessing
 #model.add(Cropping2D( cropping((70,25), (1,1)), input_shape=(160,320,3) ))
