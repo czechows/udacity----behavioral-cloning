@@ -30,8 +30,7 @@ model = Sequential()
 model.add(Flatten(input_shape=(160,320,3)))
 model.add(Dense(1))
 
-model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv1'))
-model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv2'))
+model.add(Conv2D(64, (3, 3, 3), activation='relu', padding='same', name='block1_conv1'))
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 
 model.compile(loss='mse', optimizer='adam')
