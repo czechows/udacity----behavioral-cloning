@@ -2,7 +2,7 @@ import csv
 import cv2
 import numpy as np
 import keras
-from keras.models import Sequential
+from keras.models import Sequential, Conv2D, MaxPooling2D
 from keras.layers import Flatten, Dense
 
 lines = []
@@ -29,6 +29,10 @@ y_train = np.array(measurements)
 model = Sequential()
 model.add(Flatten(input_shape=(160,320,3)))
 model.add(Dense(1))
+
+model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv1'))
+model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv2'))
+model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 
 model.compile(loss='mse', optimizer='adam')
 model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=7)
