@@ -21,8 +21,8 @@ for line in lines:
     current_path = 'data/IMG/' + filename
     image = cv2.imread(current_path)
     image = image / 255.0 - 0.5;
-    print(min(image))
-    print(max(image))
+    print(min(np.array(image)))
+    print(max(np.array(image)))
     images.append(image)
     measurement = float(line[3])
     measurements.append(measurement)
