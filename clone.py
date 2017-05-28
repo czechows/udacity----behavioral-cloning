@@ -67,10 +67,10 @@ model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
 
 # Block 3
-#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1'))
-#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv2'))
-#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv3'))
-#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
+model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1'))
+model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv2'))
+model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv3'))
+model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
 
 # Block 4
 #model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv1'))
@@ -85,8 +85,8 @@ model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
 #model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
 model.add(Flatten(name='flatten'))
-model.add(Dense(16, activation='relu', name='fc1'))
-model.add(Dense(8, activation='relu', name='fc2'))
+model.add(Dense(4096, activation='relu', name='fc1'))
+model.add(Dense(4096, activation='relu', name='fc2'))
 model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
