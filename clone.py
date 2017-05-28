@@ -7,7 +7,7 @@ from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Cropping2D
 from keras.preprocessing.image import ImageDataGenerator
 
 lines = []
-with open ('data/driving_log.csv') as csvfile:
+with open ('data1/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         lines.append(line)
@@ -18,7 +18,7 @@ measurements = []
 for line in lines:
     source_path = line[0]
     filename = source_path.split('/')[-1]
-    current_path = 'data/IMG/' + filename
+    current_path = 'data1/IMG/' + filename
     image = cv2.imread(current_path)
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     image = image / 255.0 - 0.5;
@@ -34,7 +34,7 @@ datagen = ImageDataGenerator(
     height_shift_range=0.0,
     horizontal_flip=True)
 
-data_dir = 'data'
+data_dir = 'data1'
 
 def generator(samples, batch_size=32):
     num_samples = len(samples)
