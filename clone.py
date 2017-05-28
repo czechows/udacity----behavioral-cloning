@@ -53,7 +53,8 @@ model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', input_shape=(80,1
 model.add(Flatten(name='flatten'))
 model.add(Dense(100, name='fc1'))
 model.add(Dense(50, name='fc2'))
-model.add(Dense(10, name='predictions'))
+model.add(Dense(10, name='fc3'))
+model.add(Dense(1, name='predictions'))
 
 # Preprocessing
 
