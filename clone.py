@@ -49,7 +49,7 @@ for line in lines:
     measurements.append(measurement)
 
 for i in range(0, len(images)-1):
-    if(measurement[i] = 0):
+    if(measurements[i] = 0):
         del measurements[i]
         del images[i]
 
