@@ -22,9 +22,12 @@ for line in lines:
     image = cv2.imread(current_path)
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     image = image / 255.0 - 0.5;
-    images.append(image)
+
     measurement = float(line[3])
-    measurements.append(measurement)
+
+    if not(measurement==0):
+        images.append(image)
+        measurements.append(measurement)
 
 for line in lines:
     source_path = line[1]
@@ -38,7 +41,7 @@ for line in lines:
     measurements.append(measurement)
 
 for line in lines:
-    source_path = line[1]
+    source_path = line[2]
     filename = source_path.split('/')[-1]
     current_path = 'data1/IMG/' + filename
     image = cv2.imread(current_path)
@@ -47,14 +50,6 @@ for line in lines:
     images.append(image)
     measurement = float(line[3]) - 0.2
     measurements.append(measurement)
-
-print(len(images))
-print(len(measurements))
-
-for i in range(0, len(images)-1):
-    if (measurements[i] == 0):
-        print(i)
-        
 
 datagen = ImageDataGenerator(
     featurewise_center=False,
