@@ -48,10 +48,11 @@ batch_size = 16
 # Preprocessing
 #model.add(Cropping2D( cropping((70,25), (1,1)), input_shape=(160,320,3) ))
 
-model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3) )
+#model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3) )
+        
 
 
-model.add(Conv2D(24, 5, 5, activation='relu', border_mode='same'))
+model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(160,320,3), border_mode='same'))
 
 
 # VGG: Block 1
