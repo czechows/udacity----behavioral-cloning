@@ -25,7 +25,7 @@ for line in lines:
 
     measurement = float(line[3])
 
-    if not(measurement < 0.2):
+    if not( abs(measurement) < 0.2):
         images.append(image)
         measurements.append(measurement)
 
@@ -37,7 +37,7 @@ for line in lines:
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     image = image / 255.0 - 0.5;
     images.append(image)
-    measurement = float(line[3]) + 0.5
+    measurement = float(line[3]) + 0.2
     measurements.append(measurement)
 
 for line in lines:
@@ -48,7 +48,7 @@ for line in lines:
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     image = image / 255.0 - 0.5;
     images.append(image)
-    measurement = float(line[3]) - 0.5
+    measurement = float(line[3]) - 0.2
     measurements.append(measurement)
 
 datagen = ImageDataGenerator(
