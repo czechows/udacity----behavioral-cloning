@@ -47,7 +47,13 @@ model = Sequential()
 batch_size = 16
 
 # NVIDIA
-model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', input_shape=(80,160,3), border_mode='same'))
+model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', name="conv1", input_shape=(80,160,3), border_mode='same'))
+model.add(Conv2D(36, 5, 5, subsample=(2,2), activation='relu', name="conv2", border_mode='same'))
+model.add(Conv2D(48, 5, 5, subsample=(2,2), activation='relu', name="conv3", border_mode='same'))
+model.add(Conv2D(64, 3, 3, activation='relu', name="conv4", border_mode='same'))
+model.add(Conv2D(64, 3, 3, activation='relu', name="conv5", border_mode='same'))
+
+
 
 
 model.add(Flatten(name='flatten'))
