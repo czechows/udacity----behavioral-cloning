@@ -20,9 +20,8 @@ for line in lines:
     filename = source_path.split('/')[-1]
     current_path = 'data/IMG/' + filename
     image = cv2.imread(current_path)
+    image = cv2.resize(image, None, fx=0.1, fy=0.1)
     image = image / 255.0 - 0.5;
-    print(np.amin(np.array(image)))
-    print(np.amax(np.array(image)))
     images.append(image)
     measurement = float(line[3])
     measurements.append(measurement)
