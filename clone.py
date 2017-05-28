@@ -20,11 +20,8 @@ for line in lines:
     filename = source_path.split('/')[-1]
     current_path = 'data/IMG/' + filename
     image = cv2.imread(current_path)
-    if(line==4):
-        print(image)
+    print(image)
     image = image / 255.0 - 0.5;
-    if(line==4):
-        print(image)
     images.append(image)
     measurement = float(line[3])
     measurements.append(measurement)
