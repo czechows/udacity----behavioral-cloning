@@ -42,7 +42,7 @@ datagen.fit(X_train)
 
 model = Sequential()
 
-batch_size = 64
+batch_size = 32
 
 # NVIDIA
 model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', name="conv1", input_shape=(80,160,3), border_mode='same'))
