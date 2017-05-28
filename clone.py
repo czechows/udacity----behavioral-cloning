@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import keras
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Cropping2D
+from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Cropping2D, Dropout
 from keras.preprocessing.image import ImageDataGenerator
 
 lines = []
@@ -25,7 +25,7 @@ for line in lines:
 
     measurement = 4*float(line[3])
 
-    if not(measurement==0):
+    if not(measurement < 0.2):
         images.append(image)
         measurements.append(measurement)
 
@@ -37,7 +37,7 @@ for line in lines:
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     image = image / 255.0 - 0.5;
     images.append(image)
-    measurement = 4*float(line[3]) + 0.5
+    measurement = float(line[3]) + 0.5
     measurements.append(measurement)
 
 for line in lines:
@@ -48,7 +48,7 @@ for line in lines:
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     image = image / 255.0 - 0.5;
     images.append(image)
-    measurement = 4*float(line[3]) - 0.5
+    measurement = float(line[3]) - 0.5
     measurements.append(measurement)
 
 datagen = ImageDataGenerator(
@@ -80,9 +80,6 @@ batch_size = 50
 #model.add(Conv2D(48, 5, 5, activation='relu', name="conv3", border_mode='same'))
 #model.add(Conv2D(64, 3, 3, activation='relu', name="conv4", border_mode='same'))
 #model.add(Conv2D(64, 3, 3, activation='relu', name="conv5", border_mode='same'))
-
-
-
 
 #model.add(Flatten(name='flatten'))
 #model.add(Dense(100, name='fc1'))
@@ -129,9 +126,13 @@ model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
 model.add(Flatten(name='flatten'))
+model.add(Dropout(0.6))
 model.add(Dense(1000, activation='relu', name='fc1'))
+model.add(Dropout(0.6))
 model.add(Dense(500, activation='relu', name='fc2'))
+model.add(Dropout(0.6))
 model.add(Dense(50, activation='relu', name='fc3'))
+model.add(Dropout(0.6))
 model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
