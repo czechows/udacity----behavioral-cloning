@@ -53,17 +53,18 @@ batch_size = 16
         
 
 
-model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(80,160,3), border_mode='same'))
+#model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(80,160,3), border_mode='same'))
 
 
 # VGG: Block 1
-#model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
-#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
+model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv1'))
+model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
+model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 
 # Block 2
-#model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1'))
-#model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv2'))
-#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
+model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1'))
+model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv2'))
+model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
 
 # Block 3
 #model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1'))
