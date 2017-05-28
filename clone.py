@@ -40,11 +40,9 @@ y_train = np.array(measurements)
 X_train = X_train.astype('float32')
 datagen.fit(X_train)
 
-print("NORM OK")
-
 model = Sequential()
 
-batch_size = 16
+batch_size = 64
 
 # NVIDIA
 model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', name="conv1", input_shape=(80,160,3), border_mode='same'))
