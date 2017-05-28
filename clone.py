@@ -21,24 +21,24 @@ for line in lines:
     current_path = 'data/IMG/' + filename
     image = cv2.imread(current_path)
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
-    #image = image / 255.0 - 0.5;
+    image = image / 255.0 - 0.5;
     images.append(image)
     measurement = float(line[3])
     measurements.append(measurement)
 
 datagen = ImageDataGenerator(
-    featurewise_center=True,
-    featurewise_std_normalization=True,
-    rotation_range=20,
-    width_shift_range=0.2,
-    height_shift_range=0.2,
+    featurewise_center=False,
+    featurewise_std_normalization=False,
+    rotation_range=0,
+    width_shift_range=0.0,
+    height_shift_range=0.0,
     horizontal_flip=True)
 
 X_train = np.array(images)
 y_train = np.array(measurements)
 
 X_train = X_train.astype('float32')
-datagen.fit(X_train)
+#datagen.fit(X_train)
 
 model = Sequential()
 
