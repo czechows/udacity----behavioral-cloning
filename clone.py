@@ -20,8 +20,8 @@ for line in lines:
     filename = source_path.split('/')[-1]
     current_path = 'data/IMG/' + filename
     image = cv2.imread(current_path)
-    image = cv2.resize(image, None, fx=0.2, fy=0.2)
-    image = image / 255.0 - 0.5;
+    image = cv2.resize(image, None, fx=0.5, fy=0.5)
+    #image = image / 255.0 - 0.5;
     images.append(image)
     measurement = float(line[3])
     measurements.append(measurement)
@@ -37,8 +37,8 @@ datagen = ImageDataGenerator(
 X_train = np.array(images)
 y_train = np.array(measurements)
 
-#X_train = X_train.astype('float32')
-#datagen.fit(X_train)
+X_train = X_train.astype('float32')
+datagen.fit(X_train)
 
 print("NORM OK")
 
@@ -47,13 +47,13 @@ model = Sequential()
 batch_size = 16
 
 # Preprocessing
-#model.add(Cropping2D( cropping((70,25), (1,1)), input_shape=(160,320,3) ))
 
+#model.add(Cropping2D( cropping((70,25), (1,1)), input_shape=(32,6,3) ))
 #model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3) )
         
 
 
-model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(32,64,3), border_mode='same'))
+model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(80,160,3), border_mode='same'))
 
 
 # VGG: Block 1
