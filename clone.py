@@ -98,7 +98,7 @@ X_train = X_train.astype('float32')
 
 model = Sequential()
 
-batch_size = 25
+batch_size = 35
 
 
 
@@ -157,8 +157,8 @@ model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
 model.add(Flatten(name='flatten'))
-model.add(Dense(200, activation='relu', name='fc1'))
-model.add(Dense(100, activation='relu', name='fc2'))
+model.add(Dense(1000, activation='relu', name='fc1'))
+model.add(Dense(1000, activation='relu', name='fc2'))
 model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
