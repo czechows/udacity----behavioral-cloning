@@ -34,6 +34,62 @@ datagen = ImageDataGenerator(
     height_shift_range=0.0,
     horizontal_flip=True)
 
+data_dir = 'data'
+
+def generator(samples, batch_size=32):
+    num_samples = len(samples)
+    while 1:  # Loop forever so the generator never terminates
+        sklearn.utils.shuffle(samples)
+        for offset in range(0, num_samples, batch_size):
+            batch_samples = samples[offset:offset+batch_size]
+            images = []
+            angles = []
+            for batch_sample in batch_samples:
+                # load images
+                center_image = cv2.imread(data_dir + "/IMG/" + batch_sample[0].split('/')[-1])
+                left_image = cv2.imread(data_dir + "/IMG/" + batch_sample[1].split('/')[-1])
+                right_image = cv2.imread(data_dir + "/IMG/" + batch_sample[2].split('/')[-1])
+
+                # select region
+                center_image = center_image[50:160, :, :]
+                left_image = left_image[50:160, :, :]
+                right_image = right_image[50:160, :, :]
+
+                # resize images
+                center_image = cv2.resize(center_image, dsize=(60, 60))
+                left_image = cv2.resize(left_image, dsize=(60, 60))
+                right_image = cv2.resize(right_image, dsize=(60, 60))
+
+                # random brightness
+                center_image = random_brightness(center_image)
+                left_image = random_brightness(left_image)
+                right_image = random_brightness(right_image)
+
+                # create flipped images
+                center_image_flipped = cv2.flip(center_image, 1)
+                left_image_flipped = cv2.flip(left_image, 1)
+                right_image_flipped = cv2.flip(right_image, 1)
+
+                # append images and corresponding steering angles to data sets
+                images.append(center_image)
+                angles.append(batch_sample[3])
+                images.append(left_image)
+                angles.append(float(batch_sample[3]) + 0.2)
+                images.append(right_image)
+                angles.append(float(batch_sample[3]) - 0.2)
+
+                # append flipped images - steering angle multiplied by -1
+                images.append(center_image_flipped)
+                angles.append(float(batch_sample[3]) * -1.0)
+                images.append(left_image_flipped)
+                angles.append(-1 * (float(batch_sample[3]) + 0.2))
+                images.append(right_image_flipped)
+                angles.append(-1 * (float(batch_sample[3]) - 0.2))
+
+            X_train = np.array(images)
+            y_train = np.array(angles)
+            yield sklearn.utils.shuffle(X_train, y_train)
+
 X_train = np.array(images)
 y_train = np.array(measurements)
 
@@ -89,16 +145,16 @@ model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
 
 # Block 4
-#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv1'))
-#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv2'))
-#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv3'))
-#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool'))
+model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv1'))
+model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv2'))
+model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv3'))
+model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool'))
 
 # Block 5
-#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv1'))
-#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv2'))
-#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv3'))
-#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
+model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv1'))
+model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv2'))
+model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv3'))
+model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
 model.add(Flatten(name='flatten'))
 model.add(Dense(200, activation='relu', name='fc1'))
