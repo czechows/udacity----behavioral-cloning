@@ -130,7 +130,8 @@ model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
 model.add(Flatten(name='flatten'))
 model.add(Dense(1000, activation='relu', name='fc1'))
-model.add(Dense(1000, activation='relu', name='fc2'))
+model.add(Dense(500, activation='relu', name='fc2'))
+model.add(Dense(50, activation='relu', name='fc2'))
 model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
