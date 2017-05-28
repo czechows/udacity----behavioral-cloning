@@ -26,6 +26,28 @@ for line in lines:
     measurement = float(line[3])
     measurements.append(measurement)
 
+for line in lines:
+    source_path = line[1]
+    filename = source_path.split('/')[-1]
+    current_path = 'data1/IMG/' + filename
+    image = cv2.imread(current_path)
+    image = cv2.resize(image, None, fx=0.5, fy=0.5)
+    image = image / 255.0 - 0.5;
+    images.append(image)
+    measurement = float(line[3]) + 0.2
+    measurements.append(measurement)
+
+for line in lines:
+    source_path = line[1]
+    filename = source_path.split('/')[-1]
+    current_path = 'data1/IMG/' + filename
+    image = cv2.imread(current_path)
+    image = cv2.resize(image, None, fx=0.5, fy=0.5)
+    image = image / 255.0 - 0.5;
+    images.append(image)
+    measurement = float(line[3]) - 0.2
+    measurements.append(measurement)
+
 datagen = ImageDataGenerator(
     featurewise_center=False,
     featurewise_std_normalization=False,
@@ -36,59 +58,6 @@ datagen = ImageDataGenerator(
 
 data_dir = 'data1'
 
-def generator(samples, batch_size=32):
-    num_samples = len(samples)
-    while 1:  # Loop forever so the generator never terminates
-        sklearn.utils.shuffle(samples)
-        for offset in range(0, num_samples, batch_size):
-            batch_samples = samples[offset:offset+batch_size]
-            images = []
-            angles = []
-            for batch_sample in batch_samples:
-                # load images
-                center_image = cv2.imread(data_dir + "/IMG/" + batch_sample[0].split('/')[-1])
-                left_image = cv2.imread(data_dir + "/IMG/" + batch_sample[1].split('/')[-1])
-                right_image = cv2.imread(data_dir + "/IMG/" + batch_sample[2].split('/')[-1])
-
-                # select region
-                center_image = center_image[50:160, :, :]
-                left_image = left_image[50:160, :, :]
-                right_image = right_image[50:160, :, :]
-
-                # resize images
-                center_image = cv2.resize(center_image, dsize=(60, 60))
-                left_image = cv2.resize(left_image, dsize=(60, 60))
-                right_image = cv2.resize(right_image, dsize=(60, 60))
-
-                # random brightness
-                center_image = random_brightness(center_image)
-                left_image = random_brightness(left_image)
-                right_image = random_brightness(right_image)
-
-                # create flipped images
-                center_image_flipped = cv2.flip(center_image, 1)
-                left_image_flipped = cv2.flip(left_image, 1)
-                right_image_flipped = cv2.flip(right_image, 1)
-
-                # append images and corresponding steering angles to data sets
-                images.append(center_image)
-                angles.append(batch_sample[3])
-                images.append(left_image)
-                angles.append(float(batch_sample[3]) + 0.2)
-                images.append(right_image)
-                angles.append(float(batch_sample[3]) - 0.2)
-
-                # append flipped images - steering angle multiplied by -1
-                images.append(center_image_flipped)
-                angles.append(float(batch_sample[3]) * -1.0)
-                images.append(left_image_flipped)
-                angles.append(-1 * (float(batch_sample[3]) + 0.2))
-                images.append(right_image_flipped)
-                angles.append(-1 * (float(batch_sample[3]) - 0.2))
-
-            X_train = np.array(images)
-            y_train = np.array(angles)
-            yield sklearn.utils.shuffle(X_train, y_train)
 
 X_train = np.array(images)
 y_train = np.array(measurements)
