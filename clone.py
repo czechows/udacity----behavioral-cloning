@@ -48,6 +48,12 @@ for line in lines:
     measurement = float(line[3]) - 0.2
     measurements.append(measurement)
 
+for i in range(0, len(images)-1):
+    if(measurement[i] = 0):
+        del measurements[i]
+        del images[i]
+
+
 datagen = ImageDataGenerator(
     featurewise_center=False,
     featurewise_std_normalization=False,
