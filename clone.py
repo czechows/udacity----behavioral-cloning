@@ -20,7 +20,7 @@ for line in lines:
     filename = source_path.split('/')[-1]
     current_path = 'data/IMG/' + filename
     image = cv2.imread(current_path)
-    image = cv2.resize(image, None, fx=0.1, fy=0.1)
+    image = cv2.resize(image, None, fx=0.2, fy=0.2)
     image = image / 255.0 - 0.5;
     images.append(image)
     measurement = float(line[3])
@@ -53,7 +53,7 @@ batch_size = 16
         
 
 
-model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(160,320,3), border_mode='same'))
+model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(32,64,3), border_mode='same'))
 
 
 # VGG: Block 1
