@@ -46,6 +46,15 @@ model = Sequential()
 
 batch_size = 16
 
+# NVIDIA
+model.add(Conv2D(24, 5, 5, subsample=(2,2), activation='relu', input_shape=(80,160,3), border_mode='same'))
+
+
+model.add(Flatten(name='flatten'))
+model.add(Dense(100, name='fc1'))
+model.add(Dense(50, name='fc2'))
+model.add(Dense(10, name='predictions'))
+
 # Preprocessing
 
 #model.add(Cropping2D( cropping((70,25), (1,1)), input_shape=(32,6,3) ))
@@ -57,20 +66,20 @@ batch_size = 16
 
 
 # VGG: Block 1
-model.add(Conv2D(64, 3, 3, activation='relu', input_shape=(80,160,3), border_mode='same', name='block1_conv1'))
-model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
+#model.add(Conv2D(64, 3, 3, activation='relu', input_shape=(80,160,3), border_mode='same', name='block1_conv1'))
+#model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 
 # Block 2
-model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1'))
-model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv2'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
+#model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1'))
+#model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv2'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
 
 # Block 3
-model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1'))
-model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv2'))
-model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv3'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
+#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1'))
+#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv2'))
+#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv3'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
 
 # Block 4
 #model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv1'))
@@ -84,14 +93,14 @@ model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
 #model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv3'))
 #model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
-model.add(Flatten(name='flatten'))
-model.add(Dense(4096, activation='relu', name='fc1'))
-model.add(Dense(4096, activation='relu', name='fc2'))
-model.add(Dense(1, name='predictions'))
+#model.add(Flatten(name='flatten'))
+#model.add(Dense(4096, activation='relu', name='fc1'))
+#model.add(Dense(4096, activation='relu', name='fc2'))
+#model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
 #model.fit(X_train, y_train, batch_size=batch_size, validation_split=0.2, shuffle=True, nb_epoch=7)
-model.fit_generator(datagen.flow(X_train, y_train, batch_size=batch_size), samples_per_epoch=len(X_train) / batch_size, nb_epoch=5)
+model.fit_generator(datagen.flow(X_train, y_train, batch_size=batch_size), validation_split=0.2, samples_per_epoch=len(X_train) / batch_size, nb_epoch=5)
 
 model.save('model.h5')
 
