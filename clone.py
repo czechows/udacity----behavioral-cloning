@@ -20,6 +20,7 @@ for line in lines:
     filename = source_path.split('/')[-1]
     current_path = 'data/IMG/' + filename
     image = cv2.imread(current_path)
+    image = image / 255.0 - 0.5;
     images.append(image)
     measurement = float(line[3])
     measurements.append(measurement)
@@ -37,6 +38,8 @@ y_train = np.array(measurements)
 
 #X_train = X_train.astype('float32')
 #datagen.fit(X_train)
+
+print("NORM OK")
 
 model = Sequential()
 
