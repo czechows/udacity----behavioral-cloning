@@ -112,13 +112,10 @@ model.add(Convolution2D(64,3,3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2)))
 
-model.add(Convolution2D(128,3,3))
-model.add(Activation('relu'))
-
 model.add(Flatten())
-model.add(Dense(100))
+model.add(Dense(32))
 model.add(Dropout(0.7))
-model.add(Dense(50))
+model.add(Dense(16))
 model.add(Dropout(0.7))
 model.add(Dense(1))
 
