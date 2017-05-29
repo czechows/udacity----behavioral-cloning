@@ -29,27 +29,27 @@ for line in lines:
         images.append(image)
         measurements.append(measurement)
 
-for line in lines:
-    source_path = line[1]
-    filename = source_path.split('/')[-1]
-    current_path = 'data1/IMG/' + filename
-    image = cv2.imread(current_path)
-    image = cv2.resize(image, None, fx=0.5, fy=0.5)
-    image = image / 255.0 - 0.5;
-    images.append(image)
-    measurement = float(line[3]) + 0.2
-    measurements.append(measurement)
+#for line in lines:
+#    source_path = line[1]
+#    filename = source_path.split('/')[-1]
+#    current_path = 'data1/IMG/' + filename
+#    image = cv2.imread(current_path)
+#    image = cv2.resize(image, None, fx=0.5, fy=0.5)
+#    image = image / 255.0 - 0.5;
+#    images.append(image)
+#    measurement = float(line[3]) + 0.2
+#    measurements.append(measurement)
 
-for line in lines:
-    source_path = line[2]
-    filename = source_path.split('/')[-1]
-    current_path = 'data1/IMG/' + filename
-    image = cv2.imread(current_path)
-    image = cv2.resize(image, None, fx=0.5, fy=0.5)
-    image = image / 255.0 - 0.5;
-    images.append(image)
-    measurement = float(line[3]) - 0.2
-    measurements.append(measurement)
+#for line in lines:
+#    source_path = line[2]
+#    filename = source_path.split('/')[-1]
+#    current_path = 'data1/IMG/' + filename
+#    image = cv2.imread(current_path)
+#    image = cv2.resize(image, None, fx=0.5, fy=0.5)
+#    image = image / 255.0 - 0.5;
+#    images.append(image)
+#    measurement = float(line[3]) - 0.2
+#    measurements.append(measurement)
 
 datagen = ImageDataGenerator(
     featurewise_center=False,
