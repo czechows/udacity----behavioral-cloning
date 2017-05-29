@@ -25,9 +25,8 @@ for line in lines:
 
     measurement = float(line[3])
 
-    if not( 0 ):
-        images.append(image)
-        measurements.append(measurement)
+    images.append(image)
+    measurements.append(measurement)
 
 #for line in lines:
 #    source_path = line[1]
@@ -96,21 +95,51 @@ batch_size = 20
 
 #model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(80,160,3), border_mode='same'))
 
-model.add(Cropping2D(cropping=((25, 15), (0, 0)), input_shape=(80, 160, 3)))
-#model.add(Convolution2D(32,1,1))
+# THIS WORKS
+#model.add(Cropping2D(cropping=((25, 15), (0, 0)), input_shape=(80, 160, 3)))
+#model.add(Convolution2D(16,1,1))
 #model.add(Activation('relu'))
-model.add(Convolution2D(16,1,1))
+#model.add(MaxPooling2D((2,2)))
+#model.add(Dropout(0.5))
+#model.add(Flatten())
+#model.add(Dense(16))
+#model.add(Dropout(0.7))
+#model.add(Dense(10))
+#model.add(Dense(1))
+
+model.add(Cropping2D(cropping=((25, 15), (0, 0)), input_shape=(80, 160, 3)))
+model.add(Convolution2D(64,3,3))
+model.add(Activation('relu'))
+model.add(Convolution2D(64,3,3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2)))
-model.add(Dropout(0.5))
-#model.add(Activation('relu'))
-model.add(Flatten())
-model.add(Dense(16))
-#model.add(Activation('relu'))
+
+model.add(Convolution2D(128,3,3))
+model.add(Activation('relu'))
+model.add(Convolution2D(128,3,3))
+model.add(Activation('relu'))
+model.add(MaxPooling2D((2,2)))
+
+model.add(Convolution2D(256,3,3))
+model.add(Activation('relu'))
+model.add(Convolution2D(256,3,3))
+model.add(Activation('relu'))
+model.add(MaxPooling2D((2,2)))
+
+model.add(Convolution2D(512,3,3))
+model.add(Activation('relu'))
+model.add(Convolution2D(512,3,3))
+model.add(Activation('relu'))
+model.add(MaxPooling2D((2,2)))
+
+model.add(Flatten(name='flatten'))
+model.add(Dense(1000))
 model.add(Dropout(0.7))
-model.add(Dense(10))
+model.add(Dense(500))
+model.add(Dropout(0.7))
+model.add(Dense(50))
+model.add(Dropout(0.7))
 model.add(Dense(1))
-#model.add(Activation('tanh'))
 
 # VGG: Block 1
 #model.add(Conv2D(64, 3, 3, activation='relu', input_shape=(80,160,3), border_mode='same', name='block1_conv1'))
