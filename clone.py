@@ -107,14 +107,14 @@ batch_size = 20
 #model.add(Dense(10))
 #model.add(Dense(1))
 
-model.add(Cropping2D(cropping=((25, 15), (0, 0)), input_shape=(80, 160, 3)))
+model.add(Cropping2D(cropping=((30, 20), (0, 0)), input_shape=(80, 160, 3)))
 model.add(Convolution2D(16,1,1))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2)))
 
 model.add(Flatten())
-model.add(Dense(16))
-model.add(Dropout(0.7))
+model.add(Dense(10))
+model.add(Dropout(0.6))
 model.add(Dense(1))
 
 # VGG: Block 1
