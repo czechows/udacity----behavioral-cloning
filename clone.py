@@ -28,27 +28,27 @@ for line in lines:
     images.append(image)
     measurements.append(measurement)
 
-#for line in lines:
-#    source_path = line[1]
-#    filename = source_path.split('/')[-1]
-#    current_path = 'data1/IMG/' + filename
-#    image = cv2.imread(current_path)
-#    image = cv2.resize(image, None, fx=0.5, fy=0.5)
-#    image = image / 255.0 - 0.5;
-#    images.append(image)
-#    measurement = float(line[3]) + 0.2
-#    measurements.append(measurement)
+for line in lines:
+    source_path = line[1]
+    filename = source_path.split('/')[-1]
+    current_path = 'data1/IMG/' + filename
+    image = cv2.imread(current_path)
+    image = cv2.resize(image, None, fx=0.5, fy=0.5)
+    image = image / 255.0 - 0.5;
+    images.append(image)
+    measurement = float(line[3]) + 0.2
+    measurements.append(measurement)
 
-#for line in lines:
-#    source_path = line[2]
-#    filename = source_path.split('/')[-1]
-#    current_path = 'data1/IMG/' + filename
-#    image = cv2.imread(current_path)
-#    image = cv2.resize(image, None, fx=0.5, fy=0.5)
-#    image = image / 255.0 - 0.5;
-#    images.append(image)
-#    measurement = float(line[3]) - 0.2
-#    measurements.append(measurement)
+for line in lines:
+    source_path = line[2]
+    filename = source_path.split('/')[-1]
+    current_path = 'data1/IMG/' + filename
+    image = cv2.imread(current_path)
+    image = cv2.resize(image, None, fx=0.5, fy=0.5)
+    image = image / 255.0 - 0.5;
+    images.append(image)
+    measurement = float(line[3]) - 0.2
+    measurements.append(measurement)
 
 datagen = ImageDataGenerator(
     featurewise_center=False,
@@ -107,14 +107,14 @@ batch_size = 20
 #model.add(Dense(10))
 #model.add(Dense(1))
 
-model.add(Cropping2D(cropping=((30, 20), (0, 0)), input_shape=(80, 160, 3)))
+model.add(Cropping2D(cropping=((20, 10), (0, 0)), input_shape=(80, 160, 3)))
 model.add(Convolution2D(16,1,1))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2)))
 
 model.add(Flatten())
-model.add(Dense(10))
-model.add(Dropout(0.6))
+model.add(Dense(16))
+model.add(Dropout(0.7))
 model.add(Dense(1))
 
 # VGG: Block 1
