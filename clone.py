@@ -25,7 +25,7 @@ for line in lines:
 
     measurement = float(line[3])
 
-    if not( abs(measurement) < 0.2):
+    if ( abs(measurement) < 0.1 ):
         images.append(image)
         measurements.append(measurement)
 
@@ -57,7 +57,7 @@ datagen = ImageDataGenerator(
     rotation_range=0,
     width_shift_range=0.0,
     height_shift_range=0.0,
-    horizontal_flip=True)
+    horizontal_flip=False)
 
 data_dir = 'data1'
 
@@ -65,7 +65,7 @@ data_dir = 'data1'
 X_train = np.array(images)
 y_train = np.array(measurements)
 
-X_train = X_train.astype('float32')
+#X_train = X_train.astype('float32')
 #datagen.fit(X_train)
 
 model = Sequential()
@@ -126,13 +126,9 @@ model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_
 model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
 model.add(Flatten(name='flatten'))
-model.add(Dropout(0.6))
 model.add(Dense(1000, activation='relu', name='fc1'))
-model.add(Dropout(0.6))
 model.add(Dense(500, activation='relu', name='fc2'))
-model.add(Dropout(0.6))
 model.add(Dense(50, activation='relu', name='fc3'))
-model.add(Dropout(0.6))
 model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')

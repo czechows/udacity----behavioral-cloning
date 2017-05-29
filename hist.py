@@ -21,7 +21,7 @@ for line in lines:
 
     measurement = float(line[3])
 
-    if not(abs(measurement) < 0.1):
+    if not(abs(measurement) < 0.8):
         images.append(image)
         measurements.append(measurement)
 import matplotlib.pyplot as plt
@@ -30,6 +30,9 @@ import numpy as np
 # Learn about API authentication here: https://plot.ly/python/getting-started
 # Find your api_key here: https://plot.ly/settings/api
 
+X_train = np.array(images)
+
+print(len(X_train))
 
 print(min(measurements))
 print(max(measurements))
