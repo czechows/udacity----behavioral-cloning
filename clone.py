@@ -70,7 +70,7 @@ y_train = np.array(measurements)
 
 model = Sequential()
 
-batch_size = 50
+batch_size = 20
 
 
 
@@ -96,40 +96,55 @@ batch_size = 50
 
 #model.add(Conv2D(24, 5, 5, activation='relu', input_shape=(80,160,3), border_mode='same'))
 
+model.add(Cropping2D(cropping=((25, 15), (0, 0)), input_shape=(80, 160, 3)))
+#model.add(Convolution2D(32,1,1))
+#model.add(Activation('relu'))
+model.add(Convolution2D(16,1,1))
+model.add(Activation('relu'))
+model.add(MaxPooling2D((2,2)))
+model.add(Dropout(0.5))
+#model.add(Activation('relu'))
+model.add(Flatten())
+model.add(Dense(16))
+#model.add(Activation('relu'))
+model.add(Dropout(0.7))
+model.add(Dense(10))
+model.add(Dense(1))
+#model.add(Activation('tanh'))
 
 # VGG: Block 1
-model.add(Conv2D(64, 3, 3, activation='relu', input_shape=(80,160,3), border_mode='same', name='block1_conv1'))
-model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
+#model.add(Conv2D(64, 3, 3, activation='relu', input_shape=(80,160,3), border_mode='same', name='block1_conv1'))
+#model.add(Conv2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))
 
 # Block 2
-model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1'))
-model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv2'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
+#model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1'))
+#model.add(Conv2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv2'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))
 
 # Block 3
-model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1'))
-model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv2'))
-model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv3'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
+#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1'))
+#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv2'))
+#model.add(Conv2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv3'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))
 
 # Block 4
-model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv1'))
-model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv2'))
-model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv3'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool'))
+#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv1'))
+#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv2'))
+#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv3'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool'))
 
 # Block 5
-model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv1'))
-model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv2'))
-model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv3'))
-model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
+#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv1'))
+#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv2'))
+#model.add(Conv2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv3'))
+#model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))
 
-model.add(Flatten(name='flatten'))
-model.add(Dense(1000, activation='relu', name='fc1'))
-model.add(Dense(500, activation='relu', name='fc2'))
-model.add(Dense(50, activation='relu', name='fc3'))
-model.add(Dense(1, name='predictions'))
+#model.add(Flatten(name='flatten'))
+#model.add(Dense(1000, activation='relu', name='fc1'))
+#model.add(Dense(500, activation='relu', name='fc2'))
+#model.add(Dense(50, activation='relu', name='fc3'))
+#model.add(Dense(1, name='predictions'))
 
 model.compile(loss='mse', optimizer='adam')
 #model.fit(X_train, y_train, batch_size=batch_size, validation_split=0.2, shuffle=True, nb_epoch=7)
