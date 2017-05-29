@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import keras
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Cropping2D, Dropout, Convolution2D
+from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Cropping2D, Dropout, Convolution2D, Activation
 from keras.preprocessing.image import ImageDataGenerator
 
 lines = []
