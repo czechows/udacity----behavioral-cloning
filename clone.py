@@ -25,7 +25,7 @@ for line in lines:
 
     measurement = float(line[3])
 
-    if not( measurement == 0 ):
+    if not( 0 ):
         images.append(image)
         measurements.append(measurement)
 
