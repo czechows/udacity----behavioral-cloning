@@ -7,7 +7,7 @@ from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Cropping2D, Dropo
 from keras.preprocessing.image import ImageDataGenerator
 
 lines = []
-with open ('data/driving_log.csv') as csvfile:
+with open ('data1/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         lines.append(line)
@@ -18,7 +18,7 @@ measurements = []
 for line in lines:
     source_path = line[0]
     filename = source_path.split('/')[-1]
-    current_path = 'data/IMG/' + filename
+    current_path = 'data1/IMG/' + filename
     image = cv2.imread(current_path)
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     image = image / 255.0 - 0.5;
@@ -111,6 +111,7 @@ model.add(Cropping2D(cropping=((25, 15), (0, 0)), input_shape=(80, 160, 3)))
 model.add(Convolution2D(16,1,1))
 model.add(Activation('relu'))
 model.add(MaxPooling2D((2,2)))
+#model.add(Dropout(0.5))
 
 model.add(Flatten())
 model.add(Dense(16))
