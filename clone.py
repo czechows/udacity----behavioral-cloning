@@ -64,7 +64,7 @@ model.compile(loss='mse', optimizer='adam')
 # Why don't we use train/validation/test split? The model is 'fine-tuned' by repeating parts of the track where it misperformed.
 # We would need to collect much more data to afford discarding data from training and putting it in train/validation/test
 
-model.fit_generator(datagen.flow(X_train, y_train, batch_size=batch_size), samples_per_epoch=len(X_train) / batch_size, nb_epoch=21)
+model.fit_generator(datagen.flow(X_train, y_train, batch_size=batch_size), samples_per_epoch=len(X_train) / batch_size, nb_epoch=25)
 
 model.save('model.h5')
 
