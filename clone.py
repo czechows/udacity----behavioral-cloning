@@ -6,6 +6,8 @@ from keras.models import Sequential
 from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Cropping2D, Dropout, Convolution2D, Activation
 from keras.preprocessing.image import ImageDataGenerator
 
+# IMPORT AND PREPROCESSING
+
 lines = []
 with open ('train_data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
@@ -28,6 +30,8 @@ for line in lines:
     images.append(image)
     measurements.append(measurement)
 
+# GENERATOR
+
 datagen = ImageDataGenerator(
     featurewise_center=False,
     featurewise_std_normalization=False,
@@ -40,6 +44,8 @@ data_dir = 'train_data'
 
 X_train = np.array(images)
 y_train = np.array(measurements)
+
+# MODEL ARCHITECTURE
 
 model = Sequential()
 
@@ -60,6 +66,8 @@ model.add(Dropout(0.7))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
+
+# MODEL TRAINING
 
 # Why don't we use train/validation/test split? The model is 'fine-tuned' by repeating parts of the track where it misperformed.
 # We would need to collect much more data to afford discarding data from training and putting it in train/validation/test

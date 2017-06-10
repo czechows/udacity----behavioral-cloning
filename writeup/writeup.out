@@ -1,0 +1,13 @@
+\BOOKMARK [1][-]{section.1}{Rubric points}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Submission includes all required files and can be used to run the simulator in autonomous mode}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Submission includes functional code}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Submission code is usable and readable}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Model Architecture and Training Strategy}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{An appropriate model architecture has been employed}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Attempts to reduce overfitting in the model}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.3}{Model parameter tuning}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.4}{Appropriate training data}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Model Architecture and Training Strategy}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Solution Design Approach}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Final model architecture}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.3}{Creation of the Training Set \046 Training Process}{section.3}% 13
