@@ -45,8 +45,8 @@ for line in lines:
     image = cv2.imread(current_path)
     image = cv2.resize(image, None, fx=0.5, fy=0.5)
     measurement = float(line[3])
-    images.append(image)
-    measurements.append(measurement)
+    val_images.append(image)
+    val_measurements.append(measurement)
 
 # GENERATORS
 
