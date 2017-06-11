@@ -20,7 +20,7 @@ based on recordings of human-performed driving in this simulator.
 My algorithm is based on a convolutional neural network,
 which matches the input from vehicle's camera with the correct steering angles.
 The main goal of the project was to make the car drive one lap in autonomous mode, without leaving the road.
-The objective was achieved, as documented in the video SELF\_DRIVING.mp4.
+The objective was achieved, as documented in the video SELF\_DRIVING\_REV1.mp4.
 
 \section{Rubric points}
 
@@ -32,10 +32,11 @@ My project includes the following files:
   \item clone.py, which is a Python3 script that trains the neural network;
   \item model.h5, containing the trained network, that can drive the track;
   \item drive.py, which is the script that drives the car in autonomous mode;
-  \item writeup/writeup.pdf, which is the project documentation you are reading now;
-  \item a video file SELF\_DRIVING.mp4, serving as a proof that the car can drive one loop using the network.
+  \item writeup.pdf, which is the project documentation you are reading now;
+  \item a video file SELF\_DRIVING\_REV1.mp4, serving as a proof that the car can drive one loop using the network.
 \end{itemize}
  
+I used Python 3.6.1 and Keras 1.2.1.
 
 \subsection{Submission includes functional code}
 
@@ -192,7 +193,10 @@ It is certainly worth to have a look at that problem in the future.
 I performed three preprocessing steps.
 First one was resizing the images, effectively reducing their resolution in half, which decreased the memory requirements for the model.
 Then, I normalized the input data to have mean=0 and sigma=1, which is a standard step and allows for faster learning and easier debugging.
-Both of these steps had to be repeated in the drive.py script.
+
+REVISION: in drive.py I needed to convert RGB to BGR and resize the input, the other preprocessing steps were performed in the model (normalization using lambdas).
+In addition, I increased the speed of the car.
+
 Finally, I cropped 25 pixels from the top and 15 pixels from the bottom, already at the model architecture level.
 The reason for cropping was that only the mid-part of the front-camera images contained relevant information on the road curvature.
 
@@ -215,6 +219,7 @@ I tried to drive the car in a manner that would put it frequently in recovery-ty
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=80mm]{recovery.jpg}
+  \caption{Recovery training.}
 \end{center}
 \end{figure}
 
@@ -224,20 +229,34 @@ before, and on the bridge:
 \begin{figure}[h]
   \begin{center}
 \includegraphics[width=80mm]{bridge.jpg}
+\caption{Additional data was needed to complete the turn before the bridge.}
 \end{center}
 \end{figure}
 
 Finally, I drove an extra lap with no recovery situations, to smoothen out the driving behavior.
 
-Some more data was collected, but it decreased the performance rather than enhancing it.
-This data was excluded in driving\_log.csv, to avoid having to finetune the model again.
+REVISION: After the project revision I had to implement several bugfixes, 
+this remedied the problem of car touching the ledge at second 37, and in general the car drives smoother.
+
+However, two additional problematic situations were created, the car would drive off the track at both of the sharp turns, after the bridge.
+Therefore, I collected additional data to teach the car to perform recovery at these points.
+The car now still drives close to the edge, but performs recovery maneuvers. I believe the car did not leave the drivable portion of the road, cf. Figure below.
+
+\begin{figure}[h]
+  \begin{center}
+\includegraphics[width=40mm]{close1.jpg}\quad
+\includegraphics[width=40mm]{close2.jpg}
+\caption{Two problematic situations, but the vehicle recovers.}
+\end{center}
+\end{figure}
 
 The model was trained for 25 epochs, with batches of 20 images, using keras ImageDataGenerator, adam optimizer and the mean squared error as the loss function
 (since we are dealing with continuous range of the variable to predict).
-I did not split into training/validation/test sets, as I wanted to use all the data I collected.
-This was important for troubleshooting problems on specific parts of the track, I did not want the data I collected for that purpose to go into the validation part.
-Instead of validation accuracy, the evaluation of the model was performed in the simulator, by successfully completing a lap without driving off the road.
+I chose to use a fixed set of data for validation (also fed using an image generator), 
+as I wanted to make sure that all the training data I collected for troubleshooting was being used.
+For validation, the vehicle drove both clockwise and counterclockwise around the track (similar as for training).
 
-The training was performed on AWS g2.2xlarge server, so the training time was reduced by the use of a GPU.
+In the last epochs the training error oscillated around 0.1 with validation error $\approx 0.09$, so the model did not overfit.
+The validation error was lower, as dropout probabilities are set to 0 during validation evaluation in Keras (at least that is what I think).
 
 \end{document}

@@ -213,10 +213,17 @@ INPUT ./recovery.jpg
 INPUT bridge.jpg
 INPUT ./bridge.jpg
 INPUT ./bridge.jpg
+INPUT close1.jpg
+INPUT ./close1.jpg
+INPUT ./close1.jpg
+INPUT close2.jpg
+INPUT ./close2.jpg
+INPUT ./close2.jpg
 INPUT writeup.aux
 INPUT ./writeup.out
 INPUT ./writeup.out
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
