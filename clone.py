@@ -76,6 +76,9 @@ val_dir = 'val_data'
 X_val = np.array(val_images)
 y_val = np.array(val_measurements)
 
+print(X_train.shape)
+print(X_val.shape)
+
 # MODEL ARCHITECTURE
 
 model = Sequential()
