@@ -105,7 +105,7 @@ model.compile(loss='mse', optimizer='adam')
 # We would need to collect much more data to afford discarding data from training and putting it in train/validation/test
 
 model.fit_generator(datagen.flow(X_train, y_train, batch_size=batch_size), samples_per_epoch=len(X_train) / batch_size, nb_epoch=25, 
-        validation_data=valgen.flow(X_val, y_val, batch_size=batch_size), validation_steps=len(X_val) / batch_size )
+        validation_data=valgen.flow(X_val, y_val, batch_size=batch_size))
 
 model.save('model.h5')
 
